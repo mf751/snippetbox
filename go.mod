@@ -2,7 +2,10 @@ module github.com/mf751f/snippetbox
 
 go 1.23.4
 
-require github.com/jackc/pgx/v4 v4.18.3
+require (
+	github.com/jackc/pgx/v4 v4.18.3
+	github.com/justinas/alice v1.2.0
+)
 
 require (
 	github.com/gofrs/uuid v4.4.0+incompatible // indirect
