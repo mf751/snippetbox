@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/go-playground/form/v4"
 	"github.com/jackc/pgx/v4/stdlib"
 
 	"github.com/mf751f/snippetbox/internal/models"
@@ -18,6 +19,7 @@ type application struct {
 	errLog        *log.Logger
 	snippets      *models.SnippetModel
 	templateCache map[string]*template.Template
+	formDecoder   *form.Decoder
 }
 
 func main() {
@@ -43,11 +45,14 @@ func main() {
 		errLog.Fatal(err)
 	}
 
+	formDecoder := form.NewDecoder()
+
 	app := application{
 		infoLog:       infoLog,
 		errLog:        errLog,
 		snippets:      &models.SnippetModel{DB: db},
 		templateCache: templateCache,
+		formDecoder:   formDecoder,
 	}
 
 	srv := &http.Server{
