@@ -202,7 +202,6 @@ func (app *application) userLoginPost(w http.ResponseWriter, r *http.Request) {
 			data.Form = form
 			app.render(w, http.StatusUnprocessableEntity, "login.tmpl", data)
 		} else {
-			fmt.Println("here")
 			app.serverError(w, err)
 		}
 		return
@@ -222,13 +221,6 @@ func (app *application) userLogoutPost(w http.ResponseWriter, r *http.Request) {
 		app.serverError(w, err)
 		return
 	}
-
-	ok := app.sessionManager.Get(r.Context(), "authenticatedUserID")
-	if ok == nil {
-		app.sessionManager.Put(r.Context(), "flash", "You need to login first")
-		http.Redirect(w, r, "/", http.StatusSeeOther)
-	}
-
 	app.sessionManager.Remove(r.Context(), "authenticatedUserID")
 	app.sessionManager.Put(r.Context(), "flash", "You've been logged out succussfully!")
 	http.Redirect(w, r, "/", http.StatusSeeOther)
