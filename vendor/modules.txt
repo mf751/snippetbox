@@ -13,6 +13,8 @@ github.com/go-playground/form/v4
 # github.com/jackc/chunkreader/v2 v2.0.1
 ## explicit; go 1.12
 github.com/jackc/chunkreader/v2
+# github.com/jackc/fake v0.0.0-20150926172116-812a484cc733
+## explicit
 # github.com/jackc/pgconn v1.14.3
 ## explicit; go 1.17
 github.com/jackc/pgconn
@@ -33,6 +35,14 @@ github.com/jackc/pgservicefile
 # github.com/jackc/pgtype v1.14.0
 ## explicit; go 1.13
 github.com/jackc/pgtype
+# github.com/jackc/pgx v3.6.2+incompatible
+## explicit
+github.com/jackc/pgx
+github.com/jackc/pgx/chunkreader
+github.com/jackc/pgx/internal/sanitize
+github.com/jackc/pgx/pgio
+github.com/jackc/pgx/pgproto3
+github.com/jackc/pgx/pgtype
 # github.com/jackc/pgx/v4 v4.18.3
 ## explicit; go 1.17
 github.com/jackc/pgx/v4
@@ -48,10 +58,13 @@ github.com/justinas/alice
 ## explicit; go 1.13
 # github.com/pkg/errors v0.9.1
 ## explicit
+github.com/pkg/errors
 # github.com/shopspring/decimal v1.4.0
 ## explicit; go 1.10
 # golang.org/x/crypto v0.31.0
 ## explicit; go 1.20
+golang.org/x/crypto/bcrypt
+golang.org/x/crypto/blowfish
 golang.org/x/crypto/pbkdf2
 # golang.org/x/text v0.21.0
 ## explicit; go 1.18
