@@ -1,4 +1,4 @@
-module github.com/mf751f/snippetbox
+module github.com/mf751/snippetbox
 
 go 1.23.4
 

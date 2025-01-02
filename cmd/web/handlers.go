@@ -8,8 +8,8 @@ import (
 
 	"github.com/julienschmidt/httprouter"
 
-	"github.com/mf751f/snippetbox/internal/models"
-	"github.com/mf751f/snippetbox/internal/validator"
+	"github.com/mf751/snippetbox/internal/models"
+	"github.com/mf751/snippetbox/internal/validator"
 )
 
 type snippetCreateForm struct {

@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/mf751f/snippetbox/internal/assert"
+	"github.com/mf751/snippetbox/internal/assert"
 )
 
 func TestSecureHeaders(t *testing.T) {
