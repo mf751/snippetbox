@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"net/url"
+	"strings"
 	"testing"
 
 	"github.com/mf751/snippetbox/internal/assert"
@@ -187,6 +188,47 @@ func TestUserSignup(t *testing.T) {
 			if test.wantFormTag != "" {
 				assert.StringContains(t, body, test.wantFormTag)
 			}
+		})
+	}
+}
+
+func TestSnippetCreate(t *testing.T) {
+	app := newTestApplication(t)
+	testServer := newTestServer(t, app.routes())
+	defer testServer.Close()
+
+	tests := []struct {
+		name        string
+		wantCode    int
+		wantFormTag string
+	}{
+		{
+			name:        "Unauthenticated User",
+			wantCode:    http.StatusSeeOther,
+			wantFormTag: "/user/login",
+		},
+		{
+			name:        "Authenticated User",
+			wantCode:    http.StatusOK,
+			wantFormTag: "<form action='/snippet/create' method='POST' novalidate>",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			statusCode, _, body := testServer.get(t, "/snippet/create")
+			if strings.Contains(test.name, "Authenticated") {
+				_, _, body = testServer.get(t, "/user/login")
+				validCSRFToken := extractCSRFToken(t, body)
+				form := url.Values{}
+				form.Add("email", "alice@example.com")
+				form.Add("password", "pa$$word")
+				form.Add("csrf_token", validCSRFToken)
+				testServer.postForm(t, "/user/login", form)
+				statusCode, _, body = testServer.get(t, "/snippet/create")
+			}
+			assert.Equal(t, statusCode, test.wantCode)
+			assert.StringContains(t, body, test.wantFormTag)
 		})
 	}
 }

@@ -26,6 +26,7 @@ type application struct {
 	templateCache  map[string]*template.Template
 	formDecoder    *form.Decoder
 	sessionManager *scs.SessionManager
+	debugMode      bool
 }
 
 func main() {
@@ -35,6 +36,7 @@ func main() {
 		"postgres://postgres:1319@localhost:5432/snippetbox",
 		"Postgresql data source name",
 	)
+	debug := flag.Bool("debug", false, "Debug Mode")
 	flag.Parse()
 
 	infoLog := log.New(os.Stdout, "[info ]\t", log.Ldate|log.Ltime)
@@ -66,6 +68,7 @@ func main() {
 		templateCache:  templateCache,
 		formDecoder:    formDecoder,
 		sessionManager: sessionManager,
+		debugMode:      *debug,
 	}
 
 	tlsConfig := &tls.Config{
