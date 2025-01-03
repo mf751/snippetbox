@@ -14,6 +14,14 @@ type Snippet struct {
 	Expires time.Time
 }
 
+// Becasue the application struct is to expect this
+// so that it can recive both the snippetModel and the mocks.SnippetModel
+type SnippetModelInterface interface {
+	Insert(title, content string, expires int) (int, error)
+	Get(id int) (*Snippet, error)
+	Latest() ([]*Snippet, error)
+}
+
 type SnippetModel struct {
 	DB *sql.DB
 }

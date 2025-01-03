@@ -18,6 +18,14 @@ type User struct {
 	Created        time.Time
 }
 
+// Becasue the application struct is to expect this
+// so that it can recive both the usersModel and the mocks.usersModel
+type UserModelInterface interface {
+	Insert(name, email, password string) error
+	Authenticate(email, password string) (int, error)
+	Exists(id int) (bool, error)
+}
+
 type UserModel struct {
 	DB *sql.DB
 }
