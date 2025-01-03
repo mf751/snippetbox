@@ -3,7 +3,7 @@ CREATE TABLE snippets (
   title VARCHAR(100) NOT NULL,
   content TEXT NOT NULL,
   created TIMESTAMP NOT NULL,
-  expires TIMESTAMP NOT NULL,
+  expires TIMESTAMP NOT NULL
 );
 
 CREATE INDEX idx_snippets_created ON snippets (created);
@@ -13,7 +13,7 @@ CREATE TABLE users (
   name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   hashed_password CHAR(60) NOT NULL,
-  created DATETIME NOT NULL,
+  created TIMESTAMP NOT NULL,
   CONSTRAINT users_uc_email UNIQUE (email)
 );
 
