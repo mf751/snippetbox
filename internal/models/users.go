@@ -109,13 +109,13 @@ func (model *UserModel) ChangePassword(id int, currentPassword, newPassword stri
 		return err
 	}
 
-	sqlStatement2 := `UPDATE users SET hashed_password=$1`
+	sqlStatement2 := `UPDATE users SET hashed_password=$1 WHERE id=$2`
 	newHashedPassword, err := bcrypt.GenerateFromPassword([]byte(newPassword), 12)
 	if err != nil {
 		return err
 	}
 
-	if _, err = model.DB.Exec(sqlStatement2, string(newHashedPassword)); err != nil {
+	if _, err = model.DB.Exec(sqlStatement2, string(newHashedPassword), id); err != nil {
 		return err
 	}
 
