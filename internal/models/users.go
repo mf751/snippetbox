@@ -24,6 +24,7 @@ type UserModelInterface interface {
 	Insert(name, email, password string) error
 	Authenticate(email, password string) (int, error)
 	Exists(id int) (bool, error)
+	GetAccountInfo(id int) (User, error)
 }
 
 type UserModel struct {
@@ -80,4 +81,14 @@ func (model *UserModel) Exists(id int) (bool, error) {
 	sqlStatement := "SELECT EXISTS(SELECT true FROM users WHERE id = $1)"
 	err := model.DB.QueryRow(sqlStatement, id).Scan(&exists)
 	return exists, err
+}
+
+func (model *UserModel) GetAccountInfo(id int) (User, error) {
+	user := User{}
+	sqlStatement := `SELECT name, email, created FROM users WHERE id=$1`
+	err := model.DB.QueryRow(sqlStatement, id).Scan(&user.Name, &user.Email, &user.Created)
+	if err != nil {
+		return user, err
+	}
+	return user, nil
 }

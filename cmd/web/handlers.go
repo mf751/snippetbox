@@ -234,3 +234,15 @@ func (app *application) about(w http.ResponseWriter, r *http.Request) {
 	data := app.newTemplateData(r)
 	app.render(w, http.StatusOK, "about.tmpl", data)
 }
+
+func (app *application) account(w http.ResponseWriter, r *http.Request) {
+	data := app.newTemplateData(r)
+	id := r.Context().Value(isAuthenticatedContextKey).(int)
+	user, err := app.users.GetAccountInfo(id)
+	if err != nil {
+		app.serverError(w, err)
+	}
+	data.User = user
+
+	app.render(w, http.StatusOK, "account.tmpl", data)
+}

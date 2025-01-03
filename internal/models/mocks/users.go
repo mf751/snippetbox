@@ -31,3 +31,7 @@ func (model *UserModel) Exists(id int) (bool, error) {
 		return false, nil
 	}
 }
+
+func (model *UserModel) GetUserInfo(id int) (models.User, error) {
+	return models.User{}, nil
+}
