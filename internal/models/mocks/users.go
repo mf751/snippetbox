@@ -35,3 +35,7 @@ func (model *UserModel) Exists(id int) (bool, error) {
 func (model *UserModel) GetAccountInfo(id int) (models.User, error) {
 	return models.User{}, nil
 }
+
+func (model *UserModel) ChangePassword(id int, currentPassword, newPassword string) error {
+	return nil
+}

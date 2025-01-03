@@ -10,6 +10,7 @@
   <div>
   {{if .IsAuthenticated}}
     <a href="/user/account">Account</a>
+    <a href="/user/changepassword">Change Password</a>
     <form action='/user/logout' method='POST'>
       <input type='hidden' name='csrf_token' value='{{.CSRFToken}}'>
       <button>Logout</button>
