@@ -32,6 +32,6 @@ func (model *UserModel) Exists(id int) (bool, error) {
 	}
 }
 
-func (model *UserModel) GetUserInfo(id int) (models.User, error) {
+func (model *UserModel) GetAccountInfo(id int) (models.User, error) {
 	return models.User{}, nil
 }
